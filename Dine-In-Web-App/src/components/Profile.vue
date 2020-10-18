@@ -22,15 +22,13 @@
       <div>
     <div >
       <p>Upload an image to Firebase:</p>
-      <input type="file" @change="previewImage" accept="image/*" >
+      <input type="file" @change="inputImage" accept="image/*" >
     </div>
     <div>
-      <p>Progress: {{uploadValue.toFixed()+"%"}}
-      <progress id="progress" :value="uploadValue" max="100" ></progress>  </p>
+      <p>Progress: {{uploadPct.toFixed()+"%"}}
+      <progress id="progress" :value="uploadPct" max="100" ></progress>  </p>
     </div>
       <div v-if="imageData!=null">
-        <img class="preview" :src="picture">
-        <br>
         <button @click="setProfileImage">Upload</button>
       </div>
     </div>
@@ -57,7 +55,7 @@ export default {
       },
       user_id: 1, // Should be passed as a prop from Login Page. Upon Log In, Auth should return user_id and update parent before passing to profile
       loaded: false, // Triggered when data has sucessfully been pulled after Vue app is mounted
-      uploadValue: 0,
+      uploadPct: 0,
       imageData: null,
     }
   },
@@ -103,13 +101,13 @@ export default {
         let uploadTask = storage.ref(`${this.imageData.name}`).put(this.imageData);
         uploadTask.on('state_changed', 
         snapshot => {
-          this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+          this.uploadPct = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
         },
         error => {
           console.log("Error uploading profile picture ", error);
         },
         () => {
-          this.uploadValue = 100;
+          this.uploadPct = 100;
           uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
             this.profileInfo.imgURL = downloadURL; // Profile Info has image URL and can directly pull with img tag
             this.updateProfile(); // Call on update profile to update downloadURL
@@ -118,7 +116,7 @@ export default {
         }
       )
     },
-    previewImage(event) {
+    inputImage(event) {
       this.uploadValue=0;
       this.picture=null;
       this.imageData = event.target.files[0];
@@ -182,8 +180,9 @@ div.content {
   background-image: linear-gradient( rgb(78, 223, 78), rgb(85, 199, 228));
 }
 
-img.preview {
-    width: 200px;
+img {
+    width: 300px;
+    height: auto;
 }
 </style>
 
