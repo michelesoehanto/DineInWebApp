@@ -1,15 +1,15 @@
 import firebase from 'firebase'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAbJfzkgs_to84nRnapY4H80HuQdfMiDoM",
-  authDomain: "hello-world-54831.firebaseapp.com",
-  databaseURL: "https://hello-world-54831.firebaseio.com",
-  projectId: "hello-world-54831",
-  storageBucket: "hello-world-54831.appspot.com",
-  messagingSenderId: "216290515874",
-  appId: "1:216290515874:web:c105c73e531bf894f4b0fb",
-  measurementId: "G-3K3L86HLZJ"
-};
+    apiKey: "AIzaSyCmWJBSMq0WNHm5ZwclsASEAbio_yLTiI4",
+    authDomain: "dineinwebapp.firebaseapp.com",
+    databaseURL: "https://dineinwebapp.firebaseio.com",
+    projectId: "dineinwebapp",
+    storageBucket: "dineinwebapp.appspot.com",
+    messagingSenderId: "513928158083",
+    appId: "1:513928158083:web:e39ddd6a27fc6ea18e74b6",
+    measurementId: "G-ZF6RWQPV66"
+  };
 
   firebase.initializeApp(firebaseConfig);
   var database = firebase.firestore();
