@@ -15,8 +15,7 @@
     </div>
 
     <div class="content">
-      <h2>Home Page</h2>
-      <p>This example use media queries to transform the sidebar to a top navigation bar when the screen size is 700px or less.</p>
+      <h2>Profile Page of {{profileInfo.user_name}}</h2>
       <p>We have also added a media query for screens that are 400px or less, which will vertically stack and center the navigation links.</p>
       <h3>Resize the browser window to see the effect.</h3>
     </div>
@@ -26,17 +25,39 @@
 </template>
 <script>
 // Functionality
-// 1) Search bar (See: https://codepen.io/trevoreyre/pen/JjGxLEm)
-//    - Dropdown with suggestions?
-//    - Get link to restaurant page
-// 2) Carousel with Links + Pull Image/Caption/etc. from Firebase
-// 3) Logged In vs Non-Logged In state trigger
+// 1) Get and Update Profile Information from Firebase
+import database from '../firebase.js'
 
 export default {
+  data() {
+    return {
+      profileInfo: {},
+      user_id: 1 // Should be passed as a prop from Login Page upon Log In
+    }
+  },
+  methods: {
+    fetchProfile: function() {
+      database.collection('users').get().then((querySnapShot) => { //where("user_name", "==", this.user_id)
+        querySnapShot.forEach(doc=>{
+          // User Profile Data
+          console.log("User data =>", doc.data());
+          this.profileInfo.user_name = doc.data().user_name;
+          // Personal Information (Salutation + First Name + Last Name + DOB)
+          this.profileInfo.name = doc.data().name;
+          // Contact Details
+          this.profileInfo.contact = doc.data().contact_details;
+          // Payment Details (CC + Wallet only)
+          this.profileInfo.payment = doc.data().cc_payment_info;
+          this.profileInfo.wallet_balance = doc.data().wallet_balance;
+        })
+      }).catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+    }
+  }
   
 }
 </script>
-
 <style>
 body {
   margin: 0;
