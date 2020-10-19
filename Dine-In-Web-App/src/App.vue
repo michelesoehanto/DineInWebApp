@@ -1,14 +1,15 @@
 <template>
-  <Home/>
+  <Resto/>
 </template>
 
 <script>
-import Home from './components/Home.vue'
+import Resto from './components/Resto.vue'
+
 
 export default {
   name: 'App',
   components: {
-    Home
+    Resto
   }
 }
 </script>
