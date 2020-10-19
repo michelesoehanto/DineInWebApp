@@ -15,7 +15,7 @@
     </div>
 
     <div class="content">
-      <h2>Home Page</h2>
+      <h2>Map Page</h2>
       <p>This example use media queries to transform the sidebar to a top navigation bar when the screen size is 700px or less.</p>
       <p>We have also added a media query for screens that are 400px or less, which will vertically stack and center the navigation links.</p>
       <h3>Resize the browser window to see the effect.</h3>
@@ -26,17 +26,12 @@
 </template>
 <script>
 // Functionality
-// 1) Search bar (See: https://codepen.io/trevoreyre/pen/JjGxLEm)
-//    - Dropdown with suggestions?
-//    - Get link to restaurant page
-// 2) Carousel with Links + Pull Image/Caption/etc. from Firebase
-// 3) Logged In vs Non-Logged In state trigger
+// 1) ??? TBD ??? Entirely via maps API?
 
 export default {
-  
+    
 }
 </script>
-
 <style>
 body {
   margin: 0;
